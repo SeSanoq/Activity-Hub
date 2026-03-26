@@ -16,11 +16,16 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('My-activities')" :active="request()->routeIs('My-activities')">
-                        {{ __('My-activities') }}
+                        {{ __('My activities') }}
                     </x-nav-link>
                         @if(auth()->user()->role === 'admin')
                             <x-nav-link :href="url('/admin/activities')">
                                 Admin Panel
+                            </x-nav-link>
+                        @endif
+                        @if(auth()->user()->role === 'staff')
+                            <x-nav-link :href="url('/my-created-activities')">
+                                My club
                             </x-nav-link>
                         @endif
                         @if(auth()->user()->role === 'staff')
