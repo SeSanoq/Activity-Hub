@@ -21,9 +21,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'role', 
     ];
 
+    // เพิ่มส่วนนี้เพื่อกำหนดค่า Default ให้เป็น student เสมอ
+    protected $attributes = [
+        'role' => 'student',
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *

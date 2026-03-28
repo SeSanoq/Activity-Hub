@@ -25,10 +25,10 @@ Route::get('/dashboard', [ActivityController::class, 'index'])
 
 /*
 |--------------------------------------------------------------------------
-| USER (ผู้ใช้ทั่วไป)
+|  (ผู้ใช้ทั่วไป)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:user'])->group(function () {
+Route::middleware(['auth', 'role:user,student,staff,admin'])->group(function () {
 
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 
@@ -51,6 +51,16 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
     Route::post('/create-activity', [ActivityController::class, 'store'])->name('activities.store');
 
     Route::get('/my-created-activities', [ActivityController::class, 'myActivities']);
+
+    // เส้นทางสำหรับแสดงหน้าฟอร์มแก้ไข
+    Route::get('/activities/{id}/edit', [ActivityController::class, 'edit']);
+    // เส้นทางสำหรับรับข้อมูลที่แก้ไขแล้วไปบันทึก (ใช้ PUT หรือ PATCH)
+    Route::put('/activities/{id}', [ActivityController::class, 'update']);
+
+    Route::post('/registrations/{id}/approve', [ActivityController::class, 'approveParticipant']);
+
+    Route::post('/registrations/{id}/reject', [ActivityController::class, 'rejectParticipant']);
+
 });
 
 /*

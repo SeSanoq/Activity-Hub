@@ -1,41 +1,78 @@
-<!DOCTYPE html>
 <x-app-layout>
-    <head>
-        <title>Create Activity</title>
-    </head>
-    <body>
+    <div style="max-width: 600px; margin: 40px auto; padding: 30px; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); font-family: 'sans-serif';">
+        
+        <h1 style="font-size: 24px; font-weight: bold; color: #1f2937; margin-bottom: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 10px;">
+            สร้างกิจกรรมใหม่ (Create Activity)
+        </h1>
 
-    <h1>Create Activity</h1>
-
-    @if(session('success'))
-        <p style="color:green">{{ session('success') }}</p>
+        @if(session('success'))
+            <div style="background: #d1fae5; color: #065f46; padding: 12px; border-radius: 8px; margin-bottom: 20px;">
+                {{ session('success') }}
+            </div>
         @endif
 
-    <form action="/create-activity" method="POST" enctype="multipart/form-data">
-    @csrf
+        <form action="/create-activity" method="POST" enctype="multipart/form-data">
+            @csrf
 
-    <label>Title</label><br>
-    <input type="text" name="title"><br><br>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 5px;">ชื่อกิจกรรม (Title)</label>
+                <input type="text" name="title" required style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;">
+            </div>
 
-    <label>Description</label><br>
-    <textarea name="description"></textarea><br><br>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 5px;">รายละเอียด (Description)</label>
+                <textarea name="description" rows="3" style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;"></textarea>
+            </div>
 
-    <label>Date</label><br>
-    <input type="date" name="date"><br><br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px;">วันที่จัดกิจกรรม</label>
+                    <input type="date" name="date" required style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px;">วันปิดรับสมัคร</label>
+                    <input type="date" name="registration_deadline" required style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;">
+                </div>
+            </div>
 
-    <label>Location</label><br>
-    <input type="text" name="location"><br><br>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px;">สถานที่ (Location)</label>
+                    <input type="text" name="location" required style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px;">จำนวนรับสมัครสูงสุด (คน)</label>
+                    <input type="number" name="max_participants" placeholder="ระบุจำนวนคน" style="width: 100%; border: 1px solid #d1d5db; border-radius: 8px; padding: 10px;">
+                </div>
+            </div>
 
-    <label>Cover Image</label><br>
-    <input type="file" name="image"><br><br>
-    @if(auth()->user()->role === 'staff')     
-        <button type="submit">Create Activity</button>          
-    @endif
-    @if(auth()->user()->role === 'studen')     
-        only club Admin can create activity !    
-    @endif
+            <div style="margin-bottom: 15px; background: #f9fafb; padding: 15px; border-radius: 10px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 10px; color: #374151;">เลือกหมวดหมู่ (Tags):</label>
+                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                    @foreach($tags as $tag)
+                    <label style="display: flex; align-items: center; background: white; padding: 5px 12px; border: 1px solid #e5e7eb; border-radius: 20px; cursor: pointer; font-size: 14px;">
+                        <input type="checkbox" name="tags[]" value="{{ $tag->id }}" style="margin-right: 8px;">
+                        {{ $tag->name }}
+                    </label>
+                    @endforeach
+                </div>
+            </div>
 
-    </form>
+            <div style="margin-bottom: 25px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 5px;">รูปภาพหน้าปก (Cover Image)</label>
+                <input type="file" name="image" style="width: 100%; font-size: 14px; color: #6b7280;">
+            </div>
 
-    </body>
+            @if(auth()->user()->role === 'staff')     
+                <button type="submit" style="width: 100%; background: #2563eb; color: white; padding: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">
+                    สร้างกิจกรรมเลย
+                </button>          
+            @else     
+                <div style="text-align: center; color: #ef4444; font-weight: bold; padding: 10px; border: 1px dashed #f87171; border-radius: 10px;">
+                    ⚠️ เฉพาะ Club Admin (Staff) เท่านั้นที่สร้างกิจกรรมได้
+                </div>
+            @endif
+
+        </form>
+    </div>
 </x-app-layout>

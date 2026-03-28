@@ -30,7 +30,11 @@
     class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-bold shadow hover:bg-yellow-500 transition">
 
     Login
-
+    <a
+    href="{{ route('register') }}"
+    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+    Register
+    </a>
     </a>
 
     </div>

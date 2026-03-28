@@ -10,17 +10,15 @@
                     <x-nav-link :href="route('dashboard')" class="text-white">
                         Dashboard
                     </x-nav-link>
+                    
+                    <x-nav-link :href="route('My-activities')" class="text-white">
+                        My Activities
+                    </x-nav-link>
 
-                    <!-- USER -->
-                    @if(auth()->user()->role === 'user')
-                        <x-nav-link :href="route('My-activities')" class="text-white">
-                            My Activities
-                        </x-nav-link>
+                    <x-nav-link :href="url('/reviews')" class="text-white">
+                        Reviews
+                    </x-nav-link>
 
-                        <x-nav-link :href="url('/reviews')" class="text-white">
-                            Reviews
-                        </x-nav-link>
-                    @endif
 
                     <!-- STAFF -->
                     @if(auth()->user()->role === 'staff')

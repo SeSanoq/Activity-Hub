@@ -1,6 +1,6 @@
 <x-app-layout>
-    <h1>All Activities</h1>
-
+    <h1>All Activissssssssssssties</h1>
+    
     @if(session('success'))
         <div style="color:green;">
             {{ session('success') }}
