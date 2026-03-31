@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+html, body {
+    background-color: #ffffff !important; /* บังคับพื้นหลังขาว */
+    color: #1f2937 !important; /* บังคับตัวหนังสือสีเข้ม */
+    color-scheme: light !important; /* สั่ง Browser ว่านี่คือ Light Mode เท่านั้น */
+}
+
+/* ล้างค่าสีดำที่ Tailwind แอบใส่มา */
+.dark\:bg-gray-900, 
+.dark\:bg-gray-800, 
+[class*="dark:bg-"] {
+    background-color: #ffffff !important;
+}
+
+
+.bg-orange-500 {
+    background-color: #f97316 !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+
+[class*="dark:text-"] {
+    color: #1f2937 !important;
+}

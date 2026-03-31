@@ -64,7 +64,7 @@
             </div>
 
             @if(auth()->user()->role === 'staff')     
-                <button type="submit" style="width: 100%; background: #2563eb; color: white; padding: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">
+                <button type="submit" style="width: 100%; background: #065f46; color: white; padding: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">
                     สร้างกิจกรรมเลย
                 </button>          
             @else     

@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('activities', function (Blueprint $table) {
-            $table->json('edit_payload')->after('status')->nullable();
+            $table->text('rejection_reason')->after('status')->nullable();
             
         });
     }
     public function down(): void
     {
         Schema::table('activities', function (Blueprint $table) {
-            $table->dropColumn('edit_payload');
+            $table->dropColumn('rejection_reason');
         });
     }
 };

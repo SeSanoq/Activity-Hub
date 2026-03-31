@@ -1,109 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Activity Hub</title>
+<title>Activity Hub</title>
 
-    @vite(['resources/css/app.css','resources/js/app.js'])
-    </head>
+@vite(['resources/css/app.css','resources/js/app.js'])
 
-    <body class="bg-gray-100">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Navbar -->
-    <nav class="bg-blue-600 text-white p-4 flex justify-between items-center">
+</head>
 
-    <div class="text-lg font-bold">
-    ActivityHub
+<body class="bg-gray-50 font-sans">
+
+<!-- NAVBAR -->
+<nav class="bg-orange-500 text-white px-6 py-4 flex justify-between items-center shadow-sm">
+
+    <div class="text-lg font-bold text-gray-800">
+        ActivityHub
     </div>
 
-    <div class="space-x-4 text-sm">
+    <div class="flex items-center gap-4 text-sm">
 
-    <a href="/" class="hover:underline">Home</a>
-    <a href="/activities" class="hover:underline">Events</a>
-    <a href="/dashboard" class="hover:underline">Dashboard</a>
+        <a href="/" class="text-gray-600 hover:text-black">Home</a>
+        <a href="/activities" class="text-gray-600 hover:text-black">Events</a>
+        <a href="/dashboard" class="text-gray-600 hover:text-black">Dashboard</a>
 
-    <!-- ปุ่ม Login เด่น -->
-    <a href="/login"
-    class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-bold shadow hover:bg-yellow-500 transition">
+        <a href="/login"
+        class="bg-orange-500 text-white px-4 py-2 rounded-lg shadow hover:bg-orange-400 transition">
+        Login
+        </a>
 
-    Login
-    <a
-    href="{{ route('register') }}"
-    class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-    Register
-    </a>
-    </a>
+        <a href="{{ route('register') }}"
+        class="border border-gray-300 px-4 py-2 rounded-lg hover:bg-gray-100 transition">
+        Register
+        </a>
 
     </div>
 
-    </nav>
+</nav>
 
 
-    <!-- Intro -->
-    <div class="text-center mt-16 px-6">
+<!-- HERO -->
+<div class="max-w-6xl mx-auto mt-16 px-6 text-center pb-20">
 
-    <h1 class="text-3xl md:text-5xl font-bold mb-4">
-    Welcome to Activity Hub
+    <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight">
+        Welcome to <br>
+        <span class="text-orange-500">Activity Hub</span>
     </h1>
 
-    <p class="text-gray-600 text-sm md:text-lg">
-    เว็บไซต์สำหรับค้นหาและเข้าร่วมกิจกรรมต่าง ๆ ในมหาลัยได้ง่ายในที่เดียว
+    <p class="text-gray-500 mt-4 max-w-xl mx-auto">
+        Discover and join exciting activities, workshops, and events easily in one place
     </p>
 
-    </div>
+    <div class="mt-6 flex justify-center gap-4">
 
+        <a href="/activities"
+        class="bg-orange-500 text-white px-6 py-3 rounded-xl shadow hover:scale-105 transition">
+        Get Started Free →
+        </a>
 
-    <!-- Features -->
-    <div class="max-w-5xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
-
-    <div class="bg-white p-6 rounded shadow text-center">
-    <h2 class="font-bold text-lg mb-2">📅 ดูกิจกรรม</h2>
-    <a href="/activities">
-        <p class="text-gray-600">
-            ดูรายการกิจกรรมทั้งหมด
-        </p> 
-    </a>
-    </div>
-
-    <div class="bg-white p-6 rounded shadow text-center">
-    <h2 class="font-bold text-lg mb-2">🔍 ค้นหากิจกรรม</h2>
-    <p class="text-gray-600">ค้นหากิจกรรมที่สนใจ</p>
-    </div>
-
-    <div class="bg-white p-6 rounded shadow text-center">
-    <h2 class="font-bold text-lg mb-2">⭐ ให้คะแนน</h2>
-    <p class="text-gray-600">รีวิวและให้คะแนนกิจกรรม</p>
-    </div>
-
-    <div class="bg-white p-6 rounded shadow text-center">
-    <h2 class="font-bold text-lg mb-2">➕ สร้างกิจกรรม</h2>
-    <p class="text-gray-600">สร้างกิจกรรมของคุณเอง</p>
-    </div>
+        <a href="/activities"
+        class="border border-gray-300 px-6 py-3 rounded-xl hover:bg-gray-100 transition">
+        Browse Activities
+        </a>
 
     </div>
 
+</div>
 
-    <!-- ปุ่ม Login กลางหน้า (เด่นมาก) -->
-    <div class="text-center mt-10">
-
-    <a href="/login"
-    class="bg-red-500 text-white px-8 py-3 text-lg rounded-lg font-bold shadow hover:bg-red-600 transition">
-
-    Login Now
-
-    </a>
-
-    </div>
-
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white text-center p-4 mt-10">
+<!-- FOOTER -->
+<footer class="bg-white text-gray-500 text-center p-4 mt-10 border-t">
     © 2026 ActivityHub
-    </footer>
+</footer>
 
 
-    </body>
+</body>
 </html>
