@@ -1,0 +1,14 @@
+node_modules
+.env
+.env.local
+.env.*.local
+/public/build
+.git
+.gitignore
+docker-compose.yml
+.dockerignore
+Dockerfile
+.DS_Store
+*.log
+storage/logs/*
+bootstrap/cache/*
