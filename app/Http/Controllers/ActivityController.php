@@ -170,7 +170,13 @@ class ActivityController extends Controller
     public function edit($id)
     {
         // ดึงกิจกรรมพร้อม tags ที่มีอยู่
-        $activity = Activity::with('tags')->findOrFail($id); 
+        $activity = Activity::with('tags')->findOrFail($id);
+
+        // ตรวจสอบว่าเป็นเจ้าของกิจกรรม
+        if ($activity->user_id !== auth()->id()) {
+            abort(403, 'คุณไม่มีสิทธิ์แก้ไขกิจกรรมนี้');
+        }
+
         $tags = Tag::all();
         
         return view('activities.edit', compact('activity', 'tags'));
@@ -179,6 +185,11 @@ class ActivityController extends Controller
     public function update(Request $request, $id)
     {
         $activity = Activity::findOrFail($id);
+
+        // ตรวจสอบว่าเป็นเจ้าของกิจกรรม
+        if ($activity->user_id !== auth()->id()) {
+            abort(403, 'คุณไม่มีสิทธิ์แก้ไขกิจกรรมนี้');
+        }
         
         // ดึงข้อมูลทั้งหมดที่ Staff ส่งมา
         $data = $request->only(['title', 'description', 'date', 'registration_deadline', 'location', 'max_participants']);
@@ -199,8 +210,13 @@ class ActivityController extends Controller
     }
     public function approveParticipant($id)
     {
-        // เข้าถึง Model Registration โดยตรงเพื่อเปลี่ยนสถานะคนสมัคร
         $reg = \App\Models\Registration::findOrFail($id);
+
+        // ตรวจสอบว่าเป็นเจ้าของกิจกรรมที่คนนี้สมัคร
+        if ($reg->activity->user_id !== auth()->id()) {
+            abort(403, 'คุณไม่มีสิทธิ์จัดการผู้เข้าร่วมกิจกรรมนี้');
+        }
+
         $reg->status = 'approved';
         $reg->save();
 
@@ -210,6 +226,12 @@ class ActivityController extends Controller
     public function rejectParticipant($id)
     {
         $reg = \App\Models\Registration::findOrFail($id);
+
+        // ตรวจสอบว่าเป็นเจ้าของกิจกรรมที่คนนี้สมัคร
+        if ($reg->activity->user_id !== auth()->id()) {
+            abort(403, 'คุณไม่มีสิทธิ์จัดการผู้เข้าร่วมกิจกรรมนี้');
+        }
+
         $reg->status = 'rejected';
         $reg->save();
 

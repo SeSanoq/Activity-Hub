@@ -16,7 +16,7 @@ class AdminUserController extends Controller
     public function updateRole(Request $request, $id)
     {
         $request->validate([
-            'role' => 'required|in:student,user,admin_club,staff,admin',
+            'role' => 'required|in:student,admin_club,staff,admin',
         ]);
 
         $user = User::findOrFail($id);

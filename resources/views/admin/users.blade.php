@@ -55,7 +55,6 @@
                                     @method('PATCH')
                                     <select name="role" class="rounded-lg border-orange-300 text-sm focus:ring-orange-500 focus:border-orange-500">
                                         <option value="student" {{ $user->role === 'student' ? 'selected' : '' }}>Student</option>
-                                        <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
                                         <option value="admin_club" {{ $user->role === 'admin_club' ? 'selected' : '' }}>Admin Club</option>
                                         <option value="staff" {{ $user->role === 'staff' ? 'selected' : '' }}>Staff</option>
                                         <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>

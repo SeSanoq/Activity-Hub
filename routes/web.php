@@ -33,7 +33,7 @@ Route::get('/dashboard', [ActivityController::class, 'index'])
 |  (ผู้ใช้ทั่วไป)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:user,student,admin_club,staff,admin'])->group(function () {
+Route::middleware(['auth', 'role:student,admin_club,staff,admin'])->group(function () {
 
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 

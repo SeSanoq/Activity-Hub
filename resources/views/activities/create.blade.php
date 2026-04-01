@@ -63,13 +63,13 @@
                 <input type="file" name="image" style="width: 100%; font-size: 14px; color: #6b7280;">
             </div>
 
-            @if(auth()->user()->role === 'staff')     
+            @if(auth()->user()->role === 'admin_club')     
                 <button type="submit" style="width: 100%; background: #065f46; color: white; padding: 12px; border: none; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);">
                     สร้างกิจกรรมเลย
                 </button>          
             @else     
                 <div style="text-align: center; color: #ef4444; font-weight: bold; padding: 10px; border: 1px dashed #f87171; border-radius: 10px;">
-                    ⚠️ เฉพาะ Club Admin (Staff) เท่านั้นที่สร้างกิจกรรมได้
+                    ⚠️ เฉพาะ Admin Club เท่านั้นที่สร้างกิจกรรมได้
                 </div>
             @endif
 

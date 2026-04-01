@@ -134,13 +134,13 @@
             </form>
         @endif
 
-        {{-- Admin Delete Button พร้อม Modal --}}
-        @if(auth()->user()->role === 'admin')
+        {{-- Staff Delete Button พร้อม Modal --}}
+        @if(auth()->user()->role === 'staff')
             <form id="deleteForm" method="POST" action="/admin/activities/{{ $activity->id }}" style="margin: 0;">
                 @csrf
                 @method('DELETE')
                 <button type="button" onclick="openDeleteModal()" class="btn" style="background:#dc2626; color:white;">
-                    ลบกิจกรรม (Admin)
+                    ลบกิจกรรม (Staff)
                 </button>
             </form>
         @endif
