@@ -46,6 +46,23 @@ php artisan route:clear
 echo "Running migrations..."
 php artisan migrate --force 2>&1 || echo "Migration failed but continuing..."
 
+echo "Seeding admin user..."
+php artisan tinker --execute="
+if (!\App\Models\User::where('email', 's6704062662089@email.kmutnb.ac.th')->exists()) {
+    \App\Models\User::create([
+        'name' => 'admin000',
+        'email' => 's6704062662089@email.kmutnb.ac.th',
+        'password' => bcrypt('admin000'),
+        'role' => 'admin',
+        'email_verified_at' => now(),
+    ]);
+    echo 'Admin user created.';
+} else {
+    \App\Models\User::where('email', 's6704062662089@email.kmutnb.ac.th')->update(['role' => 'admin']);
+    echo 'Admin user already exists, role ensured.';
+}
+" 2>&1 || echo "Admin seed warning"
+
 echo "Creating storage link..."
 php artisan storage:link 2>&1 || true
 

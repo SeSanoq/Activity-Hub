@@ -6,6 +6,10 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\AdminReviewController;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/health', function () {
+    return response()->json(['status' => 'ok'], 200);
+});
+
 /*
 |--------------------------------------------------------------------------
 | Home
@@ -29,7 +33,7 @@ Route::get('/dashboard', [ActivityController::class, 'index'])
 |  (ผู้ใช้ทั่วไป)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:user,student,staff,admin'])->group(function () {
+Route::middleware(['auth', 'role:user,student,admin_club,staff,admin'])->group(function () {
 
     Route::get('/activities', [ActivityController::class, 'index'])->name('activities');
 
@@ -42,10 +46,10 @@ Route::middleware(['auth', 'role:user,student,staff,admin'])->group(function () 
 
 /*
 |--------------------------------------------------------------------------
-| STAFF (คนสร้างกิจกรรม)
+| ADMIN CLUB (คนสร้างกิจกรรม)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:staff'])->group(function () {
+Route::middleware(['auth', 'role:admin_club'])->group(function () {
 
     Route::get('/create-activity', [ActivityController::class, 'create'])->name('activities.create');
 
@@ -66,10 +70,10 @@ Route::middleware(['auth', 'role:staff'])->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| ADMIN
+| STAFF (คนอนุมัติกิจกรรม)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'role:staff'])->group(function () {
 
     // Registrations
     Route::get('/admin/registrations', [RegistrationController::class, 'adminIndex']);
@@ -84,6 +88,20 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 
     // Review & Analytics
     Route::get('/reviews', [AdminReviewController::class, 'index'])->name('admin.review');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ADMIN (จัดการ role ของ user + เข้าถึง review)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->group(function () {
+
+    Route::get('/admin/users', [App\Http\Controllers\AdminUserController::class, 'index'])->name('admin.users');
+    Route::patch('/admin/users/{id}/role', [App\Http\Controllers\AdminUserController::class, 'updateRole'])->name('admin.users.updateRole');
+
+    // Admin ดู review ได้ด้วย
+    Route::get('/admin/review', [AdminReviewController::class, 'index'])->name('admin.review.admin');
 });
 
 /*

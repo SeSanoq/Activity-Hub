@@ -25,7 +25,7 @@
                     My Activities
                 </x-nav-link>
  
-                @if(auth()->user()->role === 'staff')
+                @if(auth()->user()->role === 'admin_club')
                     <x-nav-link :href="url('/create-activity')" :active="request()->is('create-activity')"
                         class="text-white hover:text-orange-100 transition">
                         Create Activity
@@ -37,13 +37,25 @@
                     </x-nav-link>
                 @endif
  
-                @if(auth()->user()->role === 'admin')
+                @if(auth()->user()->role === 'staff')
                     <x-nav-link :href="url('/admin/activities')" :active="request()->is('admin/activities')"
                         class="text-white hover:text-orange-100 transition">
-                        Admin Panel
+                        Approve Activities
                     </x-nav-link>
  
                     <x-nav-link :href="route('admin.review')" :active="request()->routeIs('admin.review')"
+                        class="text-white hover:text-orange-100 transition">
+                        Review
+                    </x-nav-link>
+                @endif
+ 
+                @if(auth()->user()->role === 'admin')
+                    <x-nav-link :href="route('admin.users')" :active="request()->routeIs('admin.users')"
+                        class="text-white hover:text-orange-100 transition">
+                        Manage Users
+                    </x-nav-link>
+ 
+                    <x-nav-link :href="url('/admin/review')" :active="request()->is('admin/review')"
                         class="text-white hover:text-orange-100 transition">
                         Review
                     </x-nav-link>
@@ -103,7 +115,7 @@
                 My Activities
             </x-responsive-nav-link>
  
-            @if(auth()->user()->role === 'staff')
+            @if(auth()->user()->role === 'admin_club')
                 <x-responsive-nav-link :href="url('/create-activity')" class="text-white hover:bg-orange-700">
                     Create Activity
                 </x-responsive-nav-link>
@@ -112,9 +124,21 @@
                 </x-responsive-nav-link>
             @endif
  
-            @if(auth()->user()->role === 'admin')
+            @if(auth()->user()->role === 'staff')
                 <x-responsive-nav-link :href="url('/admin/activities')" class="text-white hover:bg-orange-700">
-                    Admin Panel
+                    Approve Activities
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.review')" class="text-white hover:bg-orange-700">
+                    Review
+                </x-responsive-nav-link>
+            @endif
+ 
+            @if(auth()->user()->role === 'admin')
+                <x-responsive-nav-link :href="route('admin.users')" class="text-white hover:bg-orange-700">
+                    Manage Users
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="url('/admin/review')" class="text-white hover:bg-orange-700">
+                    Review
                 </x-responsive-nav-link>
             @endif
         </div>
