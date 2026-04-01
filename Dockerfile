@@ -9,6 +9,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /var/www
 COPY . .
 
+# Fix Windows CRLF line endings for shell script
+RUN sed -i 's/\r$//' /var/www/docker-entrypoint.sh
+
 # Create temporary .env for build
 RUN cp .env.example .env
 

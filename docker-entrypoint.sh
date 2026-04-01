@@ -23,6 +23,8 @@ DB_PASSWORD=${DB_PASSWORD:-}
 SESSION_DRIVER=${SESSION_DRIVER:-file}
 SESSION_LIFETIME=120
 SESSION_ENCRYPT=false
+SESSION_PATH=/
+SESSION_DOMAIN=null
 
 CACHE_STORE=${CACHE_STORE:-file}
 QUEUE_CONNECTION=${QUEUE_CONNECTION:-sync}
@@ -34,7 +36,18 @@ MAIL_MAILER=log
 EOF
 
 echo ".env file generated"
+cat /var/www/.env
+
+echo "Clearing caches..."
+php artisan config:clear
+php artisan view:clear
+php artisan route:clear
+
 echo "Running migrations..."
-php artisan migrate --force || echo "Migration warning (may be expected)"
+php artisan migrate --force 2>&1 || echo "Migration failed but continuing..."
+
+echo "Creating storage link..."
+php artisan storage:link 2>&1 || true
+
 echo "Starting server on 0.0.0.0:10000..."
 exec php artisan serve --host=0.0.0.0 --port=10000
