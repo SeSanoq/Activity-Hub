@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 // TC-02-1: Activity Admin สร้างกิจกรรมใหม่ → status = pending
 test('TC-02-1: activity admin can create activity and status is pending', function () {
     Storage::fake('public');
-    $admin = User::factory()->create(['role' => 'admin']);
+    $admin = User::factory()->create(['role' => 'admin_club']);
     $tag   = Tag::factory()->create();
 
     $response = $this->actingAs($admin)->post('/create-activity', [
@@ -25,7 +25,8 @@ test('TC-02-1: activity admin can create activity and status is pending', functi
         'location'              => 'KMUTNB',
         'max_participants'      => 30,
         'tags'                  => [$tag->id],
-        'image'                 => UploadedFile::fake()->image('activity.jpg'),
+        'image'                 => UploadedFile::fake()->image('doge.png'),
+        
     ]);
 
     $response->assertRedirect('/dashboard');
