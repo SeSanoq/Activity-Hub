@@ -83,7 +83,7 @@ test('TC-02-4: staff can reject new pending activity', function () {
 
 // TC-02-5: Activity Admin ขอแก้ไข → edit_payload บันทึก, status = pending
 test('TC-02-5: activity admin edit request saves to edit_payload with pending status', function () {
-    $admin    = User::factory()->create(['role' => 'club_admin']);
+    $admin    = User::factory()->create(['role' => 'admin_club']);
     $activity = Activity::factory()->create([
         'status'  => 'approved',
         'user_id' => $admin->id,
