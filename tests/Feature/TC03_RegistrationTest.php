@@ -68,8 +68,8 @@ test('TC-03-3: registering for the same activity twice shows error', function ()
 });
 
 // TC-03-4: Admin Approve ผู้สมัคร pending
-test('TC-03-4: admin can approve pending registration', function () {
-    $admin        = User::factory()->create(['role' => 'admin_club']);
+test('TC-03-4: staff can approve pending registration', function () {
+    $admin        = User::factory()->create(['role' => 'staff']);
     $activity     = Activity::factory()->create(['status' => 'approved']);
     $registration = Registration::create([
         'user_id'     => User::factory()->create(['role' => 'student'])->id,
@@ -78,7 +78,7 @@ test('TC-03-4: admin can approve pending registration', function () {
     ]);
 
     $this->actingAs($admin)
-        ->post("/admin_club/registrations/{$registration->id}/approve");
+        ->post("/admin/registrations/{$registration->id}/approve");
 
     $this->assertDatabaseHas('registrations', [
         'id'     => $registration->id,
@@ -87,8 +87,8 @@ test('TC-03-4: admin can approve pending registration', function () {
 });
 
 // TC-03-5: Admin Reject ผู้สมัคร
-test('TC-03-5: admin can reject pending registration', function () {
-    $admin        = User::factory()->create(['role' => 'admin_club']);
+test('TC-03-5: staff can reject pending registration', function () {
+    $admin        = User::factory()->create(['role' => 'staff']);
     $activity     = Activity::factory()->create(['status' => 'approved']);
     $registration = Registration::create([
         'user_id'     => User::factory()->create(['role' => 'student'])->id,
@@ -97,7 +97,7 @@ test('TC-03-5: admin can reject pending registration', function () {
     ]);
 
     $this->actingAs($admin)
-        ->post("/admin_club/registrations/{$registration->id}/reject");
+        ->post("/admin/registrations/{$registration->id}/reject");
 
     $this->assertDatabaseHas('registrations', [
         'id'     => $registration->id,
