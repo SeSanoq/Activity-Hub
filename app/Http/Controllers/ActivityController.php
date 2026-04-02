@@ -244,7 +244,9 @@ class ActivityController extends Controller
     }
     public function approveParticipant($id)
     {
+       
         $reg = \App\Models\Registration::findOrFail($id);
+      
 
         // ตรวจสอบว่าเป็นเจ้าของกิจกรรมที่คนนี้สมัคร
         if ($reg->activity->user_id !== auth()->id()) {
