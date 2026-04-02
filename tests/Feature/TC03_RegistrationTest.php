@@ -78,7 +78,7 @@ test('TC-03-4: admin can approve pending registration', function () {
     ]);
 
     $this->actingAs($admin)
-        ->post("/admin/registrations/{$registration->id}/approve");
+        ->post("/admin_club/registrations/{$registration->id}/approve");
 
     $this->assertDatabaseHas('registrations', [
         'id'     => $registration->id,
@@ -97,7 +97,7 @@ test('TC-03-5: admin can reject pending registration', function () {
     ]);
 
     $this->actingAs($admin)
-        ->post("/admin/registrations/{$registration->id}/reject");
+        ->post("/admin_club/registrations/{$registration->id}/reject");
 
     $this->assertDatabaseHas('registrations', [
         'id'     => $registration->id,
